@@ -1,0 +1,15 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+install:
+  - ps: Install-Module -Name AWSPowerShell 
+  - ps: Import-Module “C:\Program Files (x86)\AWS Tools\PowerShell\AWSPowerShell\AWSPowerShell.psd1”
+  - ps: Initialize-AWSDefaults
+  - ps: |
+    $accessKeyID=”EXAMPLEDXLAW52MZCGIA”
+    $secretAccessKey=”examplekfLK2c8NCFjlhhjxvYBxJwPkli1HosK4F”
+    $config=New-Object Amazon.S3.AmazonS3Config
+    $config.RegionEndpoint=[Amazon.RegionEndpoint]::”us-west-2″
+    $config.ServiceURL = “https://s3-us-west-2.amazonaws.com/“
+    
+build_script:
+  - cmd: dotnet publish
